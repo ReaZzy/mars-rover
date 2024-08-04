@@ -1,6 +1,5 @@
-import { Direction, Turn } from "../directions";
+import { Turn } from "../directions";
 import { Instructions } from "../Instructions";
-import { Rover } from "../Rover";
 import { describe, it, expect, vi } from "vitest";
 
 describe("Instructions", () => {

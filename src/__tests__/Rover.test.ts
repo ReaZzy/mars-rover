@@ -5,7 +5,7 @@ import { describe, it, expect, vi } from "vitest";
 describe("Rover", () => {
   it("Should initialize with a position and direction", () => {
     const rover = new Rover(10, 20, Direction.North);
-    expect(rover.getPosition()).toBe("10 20 N");
+    expect(rover.toString()).toBe("10 20 N");
   });
 
   it("Should place rover to a pletau", () => {
@@ -18,17 +18,6 @@ describe("Rover", () => {
     expect(pletau.addRover).toHaveBeenCalledWith(rover);
   });
 
-  it("Should throw error if rover is not within platou boundaries", () => {
-    const rover = new Rover(10, 20, Direction.North);
-    const pletau = {
-      addRover: vi.fn(),
-      isWithinBoundaries: vi.fn().mockReturnValue(false),
-    };
-    expect(() => rover.placeOnPletau(pletau)).toThrowError(
-      "Rover is placed outside of the pletau"
-    );
-  });
-
   it('Should have postion "10 21 N" after moving north', () => {
     const rover = new Rover(10, 20, Direction.North);
     const pletau = {
@@ -37,7 +26,7 @@ describe("Rover", () => {
     };
     rover.placeOnPletau(pletau);
     rover.move();
-    expect(rover.getPosition()).toBe("10 21 N");
+    expect(rover.toString()).toBe("10 21 N");
   });
 
   it('Should have postion "11 20 E" after moving east', () => {
@@ -48,7 +37,7 @@ describe("Rover", () => {
     };
     rover.placeOnPletau(pletau);
     rover.move();
-    expect(rover.getPosition()).toBe("11 20 E");
+    expect(rover.toString()).toBe("11 20 E");
   });
 
   it('Should have postion "10 19 S" after moving south', () => {
@@ -59,7 +48,7 @@ describe("Rover", () => {
     };
     rover.placeOnPletau(pletau);
     rover.move();
-    expect(rover.getPosition()).toBe("10 19 S");
+    expect(rover.toString()).toBe("10 19 S");
   });
 
   it('Should have postion "9 20 W" after moving west', () => {
@@ -70,7 +59,7 @@ describe("Rover", () => {
     };
     rover.placeOnPletau(pletau);
     rover.move();
-    expect(rover.getPosition()).toBe("9 20 W");
+    expect(rover.toString()).toBe("9 20 W");
   });
 
   it("Should throw error if rover is not placed on a pletau", () => {
@@ -81,18 +70,18 @@ describe("Rover", () => {
   it("Should face N after turning left from E", () => {
     const rover = new Rover(10, 20, Direction.East);
     rover.turn(Turn.Left);
-    expect(rover.getPosition()).toBe("10 20 N");
+    expect(rover.toString()).toBe("10 20 N");
   });
 
   it("Should face E after turning right from N", () => {
     const rover = new Rover(10, 20, Direction.North);
     rover.turn(Turn.Right);
-    expect(rover.getPosition()).toBe("10 20 E");
+    expect(rover.toString()).toBe("10 20 E");
   });
 
   it("Should face N after turning right from W", () => {
     const rover = new Rover(10, 20, Direction.West);
     rover.turn(Turn.Right);
-    expect(rover.getPosition()).toBe("10 20 N");
+    expect(rover.toString()).toBe("10 20 N");
   });
 });

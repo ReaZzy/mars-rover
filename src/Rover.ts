@@ -18,17 +18,9 @@ export class Rover {
     this.pletau = null;
   }
 
-  public getPosition(): string {
-    return `${this.x} ${this.y} ${this.direction}`;
-  }
-
   public placeOnPletau(pletau: PletauLike) {
-    if (!pletau.isWithinBoundaries(this.x, this.y)) {
-      throw new Error("Rover is placed outside of the pletau");
-    }
-
+    pletau.addRover(this);
     this.pletau = pletau;
-    this.pletau.addRover(this);
   }
 
   public move() {
@@ -64,5 +56,16 @@ export class Rover {
 
   public turn(side: Turn.Left | Turn.Right) {
     this.direction = possibleTurns[this.direction][side];
+  }
+
+  public getPosition(): { x: number; y: number } {
+    return {
+      x: this.x,
+      y: this.y,
+    };
+  }
+
+  public toString(): string {
+    return `${this.x} ${this.y} ${this.direction}`;
   }
 }
